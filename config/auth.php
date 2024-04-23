@@ -108,4 +108,9 @@ return [
 
     'password_timeout' => 10800,
 
+    'remember_me' => [
+        'lifetime' => 2628000, // 5 years in minutes
+    ],
+    
+
 ];
