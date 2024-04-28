@@ -52,6 +52,12 @@
             <span>Profile</span>
         </a>
     </li>
+    <li class="nav-item ">
+        <a class="nav-link {{ Request::is('crud') ? 'active' : '' }}" href="/crud">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Crud Operation</span>
+        </a>
+    </li>
 
 
 
