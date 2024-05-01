@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ChallanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -53,3 +55,32 @@ Route::get('/posts/{post}/edit', PostController::class .'@edit')->name('posts.ed
 Route::put('/posts/{post}', PostController::class .'@update')->name('posts.update');
 // deletes a post
 Route::delete('/posts/{post}', PostController::class .'@destroy')->name('posts.destroy');
+
+// student routes
+// Route::get('students', [StudentController::class, 'index']);
+// Route::get('fetch-students', [StudentController::class, 'fetchstudent']);
+// Route::get('/posts/{id}', [StudentController::class, 'show']);
+// Route::get('/students', [StudentController::class, 'showPosts']);
+
+// challan routes
+Route::get('/challan',[ChallanController::class,'index']);
+Route::get('/viewchallan',[ChallanController::class,'view']);
+Route::post('/createChallan',[ChallanController::class,'store']);
+Route::get('/challan',[ChallanController::class,'show']);
+Route::get('/getprice/{id}', [ChallanController::class,'getPrice']);
+Route::get('/updatechallanstatus/{id}', [ChallanController::class, 'updateStatus'])->name('viewchallan');
+
+
+
+
+// search routes
+
+Route::post('/createUser', [SearchController::class, 'store']);
+Route::get('/search',[SearchController::class,'showsearchBar']);
+Route::get('/searchStudent',[SearchController::class,'search']);
+Route::get('/editData/{id}',[SearchController::class,'edit']);
+
+
+
+
+
