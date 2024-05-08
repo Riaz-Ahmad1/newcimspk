@@ -26,10 +26,13 @@
 
                     <div class="container">
                         <div class="row">
+                            @if(session('status'))
+                            <div class="alert alert-success"> {{session('status')}} </div>
+                           @endif
+
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3> Search Students </h3>
-                                    
                                 </div>
                                 <div class="panel-body">
                                     <div class="form-group">
@@ -55,6 +58,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form action="{{ url('createUser') }}" method="post" id="insertForm">
+                                        {{ csrf_field() }}
                                         <div class="modal-body">
                                             <input type="hidden" name="sid" id="id">
                                             @csrf
@@ -174,12 +178,12 @@
                                     showConfirmButton: false
                                 });
                               },
-                              error: function(xhr, status, error) {
+                              error: function(xhr, status, error,status) {
                                 console.error(error);
                                 Swal.fire({
                                     icon: "error",
                                     title: "Oops...",
-                                    text:  error,
+                                    text:  status,
                                 });
                             }
 

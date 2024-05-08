@@ -78,4 +78,13 @@ class ChallanController extends Controller
         return response()->json(['message' => 'Data inserted successfully']);
       }
     }
+
+
+    public function countAjax(Request $request)
+    {
+        $selectedMonth = $request->input('selected_month');
+        $count = Student::where('month', $selectedMonth)->count();
+        $details = Student::where('month', $selectedMonth)->get();
+        return response()->json(['details' => $details,'count'=>$count]);
+    }
 }

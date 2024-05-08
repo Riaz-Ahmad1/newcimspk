@@ -47,15 +47,15 @@ class SearchController extends Controller
          public function store(Request $request)
          {
              
-             $validatedData = $request->validate([
-                     'sid'=> 'required',
-                     'rollno'=>'required',
-                     'name'=>'required',
-                     'class'=>'required',
-                     'reason'=>'required',
-                     'fine'=>'required',
-                     'today_date'=>'required',        
-                 ]);
+            //  $validatedData = $request->validate([
+            //          'sid'=> 'required',
+            //          'rollno'=>'required',
+            //          'name'=>'required',
+            //          'class'=>'required',
+            //          'reason'=>'required',
+            //          'fine'=>'required',
+            //          'today_date'=>'required',        
+            //      ]);
     
           //  $existingUser = Student::where('sid', $request->sid)->first();
           //  if ($existingStudent) {
@@ -65,21 +65,34 @@ class SearchController extends Controller
           //  } else {
              # code...
              $newData = new Student();
-             $newData->sid = $validatedData['sid'];
-             $newData->rollno = $validatedData['rollno'];
-             $newData->name = $validatedData['name'];
-             $newData->class = $validatedData['class'];
-             $newData->reason = $validatedData['reason'];
-             $newData->fine = $validatedData['fine'];
-             $newData->today_date = $validatedData['today_date'];
+            //  $newData->sid = $validatedData['sid'];
+            //  $newData->rollno = $validatedData['rollno'];
+            //  $newData->name = $validatedData['name'];
+            //  $newData->class = $validatedData['class'];
+            //  $newData->reason = $validatedData['reason'];
+            //  $newData->fine = $validatedData['fine'];
+            //  $newData->today_date = $validatedData['today_date'];
+
+            $newData->sid = $request->input('sid');
+            $newData->rollno = $request->input('rollno');
+            $newData->name = $request->input('name');
+            $newData->class = $request->input('class');
+            $newData->reason = $request->input('reason');
+            $newData->fine = $request->input('fine');
+            $newData->today_date = $request->input('today_date');
+
              $newData->save();
-             return response()->json(['message' => 'Data inserted successfully']);
+             
+            //  return response()->json(['message' => 'Data inserted successfully']);
+             return redirect()->back()->with('status','Data inserted successfully');
            }
            
      
         //  }
 
          
+
+     
          
 
 

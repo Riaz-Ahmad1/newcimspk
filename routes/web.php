@@ -70,6 +70,7 @@ Route::get('/challan',[ChallanController::class,'show']);
 Route::get('/getprice/{id}', [ChallanController::class,'getPrice']);
 Route::get('/updatechallanstatus/{id}', [ChallanController::class, 'updateStatus'])->name('viewchallan');
 
+Route::get('/count-data',[ChallanController::class,'countAjax'])->name('count.data');
 
 
 
@@ -79,6 +80,7 @@ Route::post('/createUser', [SearchController::class, 'store']);
 Route::get('/search',[SearchController::class,'showsearchBar']);
 Route::get('/searchStudent',[SearchController::class,'search']);
 Route::get('/editData/{id}',[SearchController::class,'edit']);
+
 
 
 

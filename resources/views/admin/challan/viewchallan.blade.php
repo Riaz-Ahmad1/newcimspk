@@ -62,6 +62,105 @@
                                   </div>
                               </div>
 
+                              <div class="card text-dark bg-primay mb-3" style="max-width: 18rem;">
+                                <h6 class="text-center border-bottom">Monthly Report</h6>
+                                 <hr>
+                                <div class="d-flex justify-content-between">
+
+                                    <select id="selected_month">
+                                        <option value="January">January</option>
+                                        <option value="February">February</option>
+                                        <option value="March">March</option>
+                                        <option value="April">April</option>
+                                        <option value="May">May</option>
+                                        <option value="June">June</option>
+                                        <option value="July">July</option>
+                                        <option value="August">August</option>
+                                        <option value="September">September</option>
+                                        <option value="October">October</option>
+                                        <option value="November">November</option>
+                                        <option value="December">December</option>
+                                        <!-- Add other months here -->
+                                    </select>
+                                   
+                                    
+                                    <script>
+                                    $(document).ready(function(){
+                                        $('#selected_month').on('change', function(){
+                                            var selectedMonth = $(this).val();
+                                            console.log(selectedMonth);
+                                            $.ajax({
+                                                url: "{{ route('count.data') }}",
+                                                method: 'get',
+                                                data: {
+                                                    _token: '{{ csrf_token() }}',
+                                                    selected_month: selectedMonth
+                                                },
+                                                // success: function(response){
+                                                //     console.log(response.count);
+                                                //     $('#count_result').text(response.count);
+                                                // }
+                                                success: function(response) {
+                                                    var results = response.details;
+                                                    showModel();
+                                                    $('#count_result').text('Total : '+response.count);
+                                                    var html = '<table class="table table-bordered table-hover">';
+                                                    html +=
+         '<thead><th>Sid</th><th>Rollno</th><th>Name</th><th>Class</th><th>Reason</th><th>Fine</th> <th>Date</th><th>status</th></thead>';
+                                                    html += '<tbody>';
+                                                    if (results.length > 0) {
+                                                        $.each(results, function(index, result) {
+                                                            html += '<tr>';
+                                                            html += '<td>' + result.sid + '</td>';
+                                                            html += '<td>' + result.rollno + '</td>';
+                                                            html += '<td>' + result.name + '</td>';
+                                                            html += '<td>' + result.class + '</td>';
+                                                            html += '<td>' + result.reason + '</td>';
+                                                            html += '<td>' + result.fine + '</td>';
+                                                            html += '<td>' + result.today_date + '</td>';
+                                                            html += '<td>' + result.status + '</td>';
+                                                           
+                                                            html += '</tr>';
+                                                        });
+                                                    } else {
+                                                        html += '<tr><td colspan="2">No results found</td></tr>';
+                                                    }
+                                                    html += '</tbody>';
+                                                    html += '</table>';
+                                                    $('#search-results').html(html);
+                                                    // Clear input field after search
+                                                    // $('#search').val('');
+                                                }
+                                            });
+                                            function showModel() {
+                                                $('#showmonthlyReport').modal('show');
+                                            }
+                                        });
+                                    });
+                                    </script>
+                                </div>
+                              </div>
+
+                        </div>
+                        <div class="row">
+                           
+                            {{-- modal start --}}
+                          <div class="modal fad" id="showmonthlyReport" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title" id="exampleModalLabel">Monthly Report</h3>
+                                            <hr>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                        </div>
+                                        <h5 id="count_result"></h5>
+                                        <p id="search-results"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- modal end --}}
                         </div>
                         <div class="row">
                             <div class="panel panel-default">
