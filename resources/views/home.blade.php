@@ -116,7 +116,7 @@
                         </ul>
                     </li>
                     <li><a class="nav-link " href="#">Career</a></li>
-                    <li><a class="nav-link " href="#">Contact</a></li>
+                    <li><a class="nav-link " href="{{url('/contact')}}">Contact</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->

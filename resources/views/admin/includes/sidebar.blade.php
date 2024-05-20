@@ -64,6 +64,12 @@
             <span>Search Students</span>
         </a>
     </li>
+    <li class="nav-item ">
+        <a class="nav-link {{ Request::is('attendance') ? 'active' : '' }}" href="/attendance">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Attendance</span>
+        </a>
+    </li>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed " href="#" data-toggle="collapse" data-target="#challan"

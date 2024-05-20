@@ -2,16 +2,29 @@
 
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ChallanController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SmsController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Middleware\EnsureTokenIsValid;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DemoEmail;
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/send-email', function () {
+  $to_email = 'riazahmad03486@gmail.com';
+  Mail::to($to_email)->send(new DemoEmail('hello word'));
+  return 'Email sent successfully!';
+});
+
+Route::get('/contact', function () {
+  return view('contact');
+})->middleware('auth');
+
 
 
 Route::get('/', function () {
@@ -44,7 +57,7 @@ Route::get('services', function () {
 // returns the home page with all posts
 Route::get('/crud', PostController::class .'@index')->name('posts.index');
 // returns the form for adding a post
-Route::get('/posts/create', PostController::class . '@create')->name('posts.create');
+Route::get('/posts/create', PostController::class . '@create')->name('posts.create')->middleware('auth');
 // adds a post to the database
 Route::post('/posts', PostController::class .'@store')->name('posts.store');
 // returns a page that shows a full post
@@ -81,8 +94,12 @@ Route::get('/search',[SearchController::class,'showsearchBar']);
 Route::get('/searchStudent',[SearchController::class,'search']);
 Route::get('/editData/{id}',[SearchController::class,'edit']);
 
+// attendance
 
+Route::get('/attendance',[AttendanceController::class,'index']);
+Route::get('/showattendance',[AttendanceController::class,'fetchAttendance']);
 
-
+// sms controller
+Route::get('/sendsms',[SmsController::class,'sendsms']);
 
 

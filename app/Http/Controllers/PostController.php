@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 use App\Models\Post;
 
@@ -16,7 +17,9 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
+        // $posts = Post::al();
+        $posts = Post::paginate(2);
+
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -37,8 +40,12 @@ class PostController extends Controller
       'title' => 'required|max:255',
       'body' => 'required',
     ]);
+    if($request->hasFile('logo')){
+        $request->file('logo')->store('logos','public');
+    }
     Post::create($request->all());
-    return redirect('/crud')->with('success', 'Post created successfully.');
+    return redirect('/crud')->with('message', 'Post created successfully.');
+    
   }
 
     /**

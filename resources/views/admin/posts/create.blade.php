@@ -12,6 +12,10 @@
           <label for="body">Body</label>
           <textarea class="form-control" id="body" name="body" rows="3" required></textarea>
         </div>
+        <div class="form-group">
+          <label for="body">Logo</label>
+          <input type="file" class="form-control" id="logo" name="logo" required/>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary">Create Post</button>
       </form>
